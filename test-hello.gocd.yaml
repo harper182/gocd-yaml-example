@@ -33,23 +33,3 @@ pipelines:
                       - build
                     command: gradle
                     run_if: passed
-      - Publish:
-          fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
-          approval:
-            type: manual
-            allow_only_on_success: true
-          jobs:
-            Create-Image-And-Publish:
-              timeout: 0
-              tasks:
-                - fetch:
-                    is_file: false
-                    source: build/libs/
-                    destination: build/
-                    pipeline: test-hello-world
-                    stage: Build-And-Test
-                    job: Clean-Build
-                    artifact_origin: gocd
-                    run_if: passed
