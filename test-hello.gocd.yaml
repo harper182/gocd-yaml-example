@@ -62,9 +62,3 @@ pipelines:
                     job: Clean-Build
                     artifact_origin: gocd
                     run_if: passed
-                - exec:
-                    arguments:
-                      - -c
-                      - docker build --tag gocdexample.jfrog.io/experiment-docker/go-cd-example:${GO_PIPELINE_COUNTER} .
-                    command: /bin/bash
-                    run_if: passed
