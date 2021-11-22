@@ -43,15 +43,6 @@ pipelines:
           jobs:
             Create-Image-And-Publish:
               timeout: 0
-              artifacts:
-                - external:
-                    id: go-cd-example
-                    store_id: docker-jfrog
-                    configuration:
-                      options:
-                        BuildFile: ''
-                        Tag: '${GO_PIPELINE_COUNTER}'
-                        Image: gocdexample.jfrog.io/experiment-docker/go-cd-example
               tasks:
                 - fetch:
                     is_file: false
