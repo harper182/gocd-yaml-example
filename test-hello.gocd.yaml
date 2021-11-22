@@ -1,0 +1,70 @@
+format_version: 10
+pipelines:
+  test-hello-world:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    materials:
+      git:
+        git: https://github.com/anthonysteele95/gocd-example
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+      - Build-And-Test:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            Clean-Build:
+              timeout: 0
+              artifacts:
+                - build:
+                    source: build/libs/*
+                    destination: build/libs/
+              tasks:
+                - exec:
+                    arguments:
+                      - clean
+                      - build
+                    command: gradle
+                    run_if: passed
+      - Publish:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            Create-Image-And-Publish:
+              timeout: 0
+              artifacts:
+                - external:
+                    id: go-cd-example
+                    store_id: docker-jfrog
+                    configuration:
+                      options:
+                        BuildFile: ''
+                        Tag: '${GO_PIPELINE_COUNTER}'
+                        Image: gocdexample.jfrog.io/experiment-docker/go-cd-example
+              tasks:
+                - fetch:
+                    is_file: false
+                    source: build/libs/
+                    destination: build/
+                    pipeline: test-hello-world
+                    stage: Build-And-Test
+                    job: Clean-Build
+                    artifact_origin: gocd
+                    run_if: passed
+                - exec:
+                    arguments:
+                      - -c
+                      - docker build --tag gocdexample.jfrog.io/experiment-docker/go-cd-example:${GO_PIPELINE_COUNTER} .
+                    command: /bin/bash
+                    run_if: passed
