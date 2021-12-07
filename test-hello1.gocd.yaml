@@ -20,9 +20,9 @@ pipelines:
             type: success
             allow_only_on_success: false
           jobs:
-            resources:
-              - linux
             Clean-Build:
+              resources:
+                - dev
               timeout: 0
               artifacts:
                 - build:
