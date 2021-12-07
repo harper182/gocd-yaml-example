@@ -1,0 +1,37 @@
+format_version: 10
+pipelines:
+  test-hello-world-000:
+    group: sample
+    label_template: ${COUNT}
+    lock_behavior: unlockWhenFinished
+    display_order: -1
+    materials:
+      git-1:
+        git: https://github.com/anthonysteele95/gocd-example
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+      - Build-And-Test:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            resources:
+              - linux
+            Clean-Build:
+              timeout: 0
+              artifacts:
+                - build:
+                    source: build/libs/*
+                    destination: build/libs/
+              tasks:
+                - exec:
+                    arguments:
+                      - clean
+                      - build
+                    command: gradle
+                    run_if: passed
