@@ -53,7 +53,7 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: artifacts
+                    source: artifacts/build/
                 - exec:
                     command: ls 
                     arguments:
