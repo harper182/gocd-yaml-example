@@ -58,5 +58,5 @@ pipelines:
                 - exec:
                     arguments:
                       - artifacts
-                    command: ls -al
+                    command: ls 
                     run_if: passed                
