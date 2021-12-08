@@ -14,7 +14,7 @@ pipelines:
     stages:
       - Build-And-Test:
           fetch_materials: true
-          keep_artifacts: false
+          keep_artifacts: true
           clean_workspace: false
           approval:
             type: success
@@ -52,7 +52,7 @@ pipelines:
                     stage: Build-And-Test
                     job: Clean-Build
                     source: tfplan
-                    destination: base2/terraform.tfplan
+                    destination: base2
                     is_file: yes
                 - exec:
                     command: ls 
