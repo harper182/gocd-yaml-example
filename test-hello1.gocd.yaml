@@ -26,7 +26,7 @@ pipelines:
               timeout: 0
               artifacts:
                 - build:
-                    source: build/**
+                    source: build/
                     destination: artifacts
               tasks:
                 - exec:
@@ -54,9 +54,8 @@ pipelines:
                     stage: Build-And-Test
                     job: Clean-Build
                     source: artifacts
-                    destination: artifacts
                 - exec:
-                    arguments:
-                      - artifacts/*
                     command: ls 
+                    arguments:
+                      - -al
                     run_if: passed                
