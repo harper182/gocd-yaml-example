@@ -26,8 +26,8 @@ pipelines:
               timeout: 0
               artifacts:
                 - build:
-                    source: build/**
-                    destination: build/
+                    source: build
+                    destination: artifacts
               tasks:
                 - exec:
                     arguments:
@@ -38,4 +38,24 @@ pipelines:
                     arguments:
                       - build
                     command: yarn
-                    run_if: passed    
+                    run_if: passed 
+      - Serve-and-test 
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false 
+          jobs:    
+            serve:
+              resources:
+                - dev
+              timeout: 0
+              tasks:
+                - fetch:
+                    stage: Build-And-Test
+                    job: Clean-Build
+                    source: artifacts
+                    destination: artifacts
+                - exec:
+                    arguments:
+                      - artifacts
+                    command: ls -al
+                    run_if: passed                
