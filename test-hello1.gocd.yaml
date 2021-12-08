@@ -62,4 +62,10 @@ pipelines:
                     command: tree 
                     arguments:
                       - base2
-                    run_if: passed                
+                    run_if: passed 
+                - exec:
+                    command: ls 
+                    arguments:
+                      - -al
+                      - base2
+                    run_if: passed                    
