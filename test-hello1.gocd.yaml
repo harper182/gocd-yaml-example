@@ -32,6 +32,10 @@ pipelines:
                 - exec:
                     arguments:
                       - install
-                      - build
                     command: yarn
                     run_if: passed
+                - exec:
+                    arguments:
+                      - build
+                    command: yarn
+                    run_if: passed    
