@@ -57,9 +57,13 @@ pipelines:
                     job: Clean-Build
                     source: asset-manifest.json
                     is_file: yes
-                    destination: asset-manifest.json
                 - exec:
                     command: ls 
                     arguments:
-                      - -al
+                      - -al 
+                    run_if: passed
+                - exec:
+                    command: ls 
+                    arguments:
+                      - -al build
                     run_if: passed                
