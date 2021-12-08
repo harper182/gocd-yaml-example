@@ -7,7 +7,7 @@ pipelines:
     display_order: -1
     materials:
       git-1:
-        git: https://github.com/anthonysteele95/gocd-example
+        git: https://github.com/harper182/my-app.git
         shallow_clone: false
         auto_update: true
         branch: master
@@ -26,12 +26,12 @@ pipelines:
               timeout: 0
               artifacts:
                 - build:
-                    source: build/libs/*
-                    destination: build/libs/
+                    source: build/*
+                    destination: build/
               tasks:
                 - exec:
                     arguments:
-                      - clean
+                      - install
                       - build
-                    command: gradle
+                    command: yarn
                     run_if: passed
