@@ -39,7 +39,8 @@ pipelines:
                       - build
                     command: yarn
                     run_if: passed 
-      - Serve-and-test 
+      
+      - Serve-and-test: 
           fetch_materials: true
           keep_artifacts: false
           clean_workspace: false 
