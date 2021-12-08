@@ -27,7 +27,6 @@ pipelines:
               artifacts:
                 - build:
                     source: build/asset-manifest.json
-                    destination: artifacts
               tasks:
                 - exec:
                     arguments:
@@ -56,7 +55,7 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: artifacts/asset-manifest.json
+                    source: asset-manifest.json
                     is_file: yes
                     destination: asset-manifest.json
                 - exec:
