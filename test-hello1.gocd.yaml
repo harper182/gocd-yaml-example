@@ -53,7 +53,7 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: artifacts/build/
+                    source: artifacts/build/asset-manifest.json
                 - exec:
                     command: ls 
                     arguments:
