@@ -54,7 +54,7 @@ pipelines:
                     stage: Build-And-Test
                     job: Clean-Build
                     source: artifacts
-                    destination: build/asset-manifest.json
+                    destination: asset-manifest.json
                 - exec:
                     command: ls 
                     arguments:
