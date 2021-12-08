@@ -26,8 +26,7 @@ pipelines:
               timeout: 0
               artifacts:
                 - build:
-                    source: base/terraform.tfplan
-                    destination: tfplan
+                    source: "base/terraform.tfplan"
               tasks:
                 - exec:
                     arguments:
@@ -51,8 +50,8 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: tfplan
-                    destination: base2
+                    source: "terraform.tfplan"
+                    destination: "base2/"
                     is_file: yes
                 - exec:
                     command: ls 
