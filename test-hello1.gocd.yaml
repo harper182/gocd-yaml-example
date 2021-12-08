@@ -46,6 +46,7 @@ pipelines:
           clean_workspace: false
           approval:
             type: manual 
+            allow_only_on_success: true
           jobs:    
             serve:
               resources:
@@ -55,7 +56,8 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: artifacts
+                    source: artifacts/**
+                    is_file: yes
                     destination: asset-manifest.json
                 - exec:
                     command: ls 
