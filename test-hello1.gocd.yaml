@@ -56,7 +56,7 @@ pipelines:
                 - fetch:
                     stage: Build-And-Test
                     job: Clean-Build
-                    source: artifacts/**
+                    source: artifacts/asset-manifest.json
                     is_file: yes
                     destination: asset-manifest.json
                 - exec:
