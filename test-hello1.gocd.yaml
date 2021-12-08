@@ -60,7 +60,7 @@ pipelines:
                       - -al 
                     run_if: passed
                 - exec:
-                    command: ls 
+                    command: tree 
                     arguments:
-                      - -al base2
+                      - base2
                     run_if: passed                
