@@ -22,6 +22,7 @@ pipelines:
           jobs:
             Clean-Build:
               timeout: 0
+              elastic_profile_id: demo-app
               artifacts:
                 - build:
                     source: build/libs/*
